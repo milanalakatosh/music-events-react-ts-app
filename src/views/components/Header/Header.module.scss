@@ -1,0 +1,30 @@
+$darkBlue: #252B40;
+
+.menu {
+  background-color: $darkBlue;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+
+  &Header {
+    font-size: 40px;
+    color: #FFF;
+  }
+
+  &Container {
+    display: flex;
+    justify-content: center;
+    position: static;
+    max-width: 1440px;
+    padding: 2rem;
+  }
+
+  &Items {
+    font-size: 20px;
+    text-decoration: unset;
+    color: #FFF;
+    &:first-child {
+      color: #FEC017;
+    }
+  }
+}
