@@ -5,6 +5,8 @@ $darkBlue: #252B40;
   width: 100vw;
   display: flex;
   justify-content: center;
+  position: relative;
+  min-height: 9rem;
 
   &Header {
     font-size: 40px;
@@ -12,19 +14,13 @@ $darkBlue: #252B40;
   }
 
   &Container {
-    display: flex;
-    justify-content: center;
     position: static;
     max-width: 1440px;
     padding: 2rem;
   }
 
-  &Items {
-    font-size: 20px;
-    text-decoration: unset;
-    color: #FFF;
-    &:first-child {
-      color: #FEC017;
-    }
+
+  @media screen and (max-width: 600px) {
+    min-height: 9rem;
   }
 }

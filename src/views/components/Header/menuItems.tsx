@@ -1,33 +1,33 @@
 import { NavLinkProps } from 'react-router-dom'
 
-export type HeaderItemDefinition = Readonly<{
+export type MenuItemDefinition = Readonly<{
   title: string//if we were to use translations, then here instead of string would be a function - ReturnType<TFunction> - from i18next
   to: NavLinkProps['to']
 }>
 
-export const headerItems: ReadonlyArray<HeaderItemDefinition> = [
+export const menuItemsList: ReadonlyArray<MenuItemDefinition> = [
   {
     title: 'All genres',
-    to: ''
+    to: '#'
   },
   {
     title: 'Alternative',
-    to: ''
+    to: '#'
   },
   {
     title: 'Ballads/Romantic',
-    to: ''
+    to: '#'
   },
   {
     title: 'Blues',
-    to: ''
+    to: '#'
   },
   {
     title: 'Chanson Francaise',
-    to: ''
+    to: '#'
   },
   {
     title: 'More...',
-    to: ''
+    to: '#'
   }
 ]

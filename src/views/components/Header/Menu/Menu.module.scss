@@ -1,0 +1,52 @@
+.menu {
+  &Mobile {
+    position: relative;
+    position: absolute;
+    right: 2rem;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+
+  &MobileList {
+    position: absolute;
+    background-color: white;
+    top: 2.6rem;
+    right: -2rem;
+    border: 1px solid #252B40;
+    padding: 1rem;
+    border-radius: 5px;
+  }
+  
+  &Button {
+    background-color: white;
+    color: #252B40;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: unset;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  &Items {
+    font-size: 20px;
+    text-decoration: unset;
+    color: #FFF;
+    @media screen and (max-width: 900px) {
+      color: #252B40;
+    }
+    &:first-child {
+      color: #FEC017;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    &Mobile {
+      position: unset;
+    }
+
+    &MobileList {
+      top: 12.5rem;
+      left: 0;
+    }
+  }
+}

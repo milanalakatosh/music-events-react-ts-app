@@ -12,7 +12,8 @@ export type FlexContainerProps = Readonly<{
   alignItemsCenter?: boolean
   vertical?: boolean
   responsiveGap?: boolean
-  noGap?: boolean
+  noGap?: boolean,
+  fitWidth?: boolean
   className?: string
 }> &
   React.PropsWithChildren
@@ -28,6 +29,7 @@ export const FlexContainer: React.FC<FlexContainerProps> = ({
   responsiveGap,
   noGap,
   vertical,
+  fitWidth,
   className,
   children
 }) => (
@@ -43,6 +45,7 @@ export const FlexContainer: React.FC<FlexContainerProps> = ({
       [styles.verticalDirection]: vertical,
       [styles.fixedGap]: !noGap && !responsiveGap,
       [styles.responsiveGap]: !noGap && responsiveGap,
+      [styles.fitWidth]: fitWidth
     })}
   >
     {children}

@@ -39,7 +39,11 @@
   margin: 0 auto;
 }
 
-@media screen and (max-width: 899px) {
+.fitWidth {
+  width: fit-content;
+}
+
+@media screen and (max-width: 900px) {
   .flexContainer {
     flex-direction: column;
   }

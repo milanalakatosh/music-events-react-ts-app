@@ -1,5 +1,14 @@
-.searchBar {
+@media screen and (min-width: 901px) {
+  .searchBar {
+    align-self: center;
+  }
+
+  .inputSearch {
+    min-width: 336px;
+  }
 }
 
 .inputSearch {
+  padding: 0.5rem;
+  min-width: 280px;
 }
