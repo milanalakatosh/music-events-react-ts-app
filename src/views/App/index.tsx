@@ -1,7 +1,10 @@
 import React from 'react'
+import { Page } from '../components/page/Page'
 
 export const App: React.FC = () => {
   return (
-    <h1>music events</h1>
+    <Page>
+      <h1>hello</h1>
+    </Page>
   )
 }

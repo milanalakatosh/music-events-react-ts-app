@@ -1,0 +1,54 @@
+.flexContainer {
+  width: 100%;
+  display: flex;
+}
+
+.fixedGap {
+  gap: 1.5rem;
+}
+
+.responsiveGap {
+  gap: 1rem;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.verticalDirection {
+  flex-direction: column;
+}
+
+.justifyContentCenter {
+  justify-content: center;
+}
+
+.justifyContentSpaceBetween {
+  justify-content: space-between;
+}
+
+.justifyContentSpaceAround {
+  justify-content: space-around;
+}
+
+.alignItemsCenter {
+  align-items: center;
+}
+
+.centeredInBlock {
+  margin: 0 auto;
+}
+
+.fitWidth {
+  width: fit-content;
+}
+
+@media screen and (max-width: 900px) {
+  .flexContainer {
+    flex-direction: column;
+  }
+
+  .flexContainer.fixedDirection, .flexContainer.wrap {
+    flex-direction: unset;
+  }
+}
