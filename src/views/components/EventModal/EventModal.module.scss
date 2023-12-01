@@ -4,7 +4,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
 }
 
 .eventModal {
@@ -36,3 +35,9 @@ button:hover {
   background-color: #0056b3;
 }
 
+.arrow {
+  border: 22px solid transparent; 
+  border-bottom: 20px solid #252B40;
+  position: fixed;
+  z-index: 100;
+}

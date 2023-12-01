@@ -37,10 +37,11 @@ export const EventModal: React.FC<EventCardProps> = ({ eventId, onClose, positio
 		<>
 			{eventInfo && (
 				<div
-					style={{ top: position.top, right: 0 }}
+					style={{ top: position.top + 16, right: 0 }}
 					className={styles.eventModalOverlay}
 					onClick={onClose}
 				>
+					<div className={styles.arrow} style={{ top: position.top - 20, left: position.left + 140 }}></div>
 					<FlexContainer
 						justifyContentSpaceBetween
 						className={styles.eventModal}

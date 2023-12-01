@@ -21,7 +21,7 @@ export const AllGenres: React.FC = () => {
 	) => {
 		const rect = event.currentTarget.getBoundingClientRect()
 		setSelectedEventId(eventId)
-		setPosition({ top: rect.bottom, right: rect.left })
+		setPosition({ top: rect.bottom, left: rect.left })
 	}
 
 	const handleModalClose = () => {

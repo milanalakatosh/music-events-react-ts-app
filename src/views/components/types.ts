@@ -22,6 +22,6 @@ export type EventValues = z.infer<typeof EventSchema>
 
 export const CardPositionSchema = z.object({
   top: z.number(), 
-  right: z.number()
+  left: z.number()
 })
 export type CardPosition = z.infer<typeof CardPositionSchema>
