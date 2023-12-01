@@ -1,7 +1,12 @@
 import * as z from 'zod'
 
-export const EventCardSchema = z.object({
-  id: z.string(),
+const StringIdSchema = z.string().min(1)
+
+export const EventIdSchema = StringIdSchema
+export type EventId = z.infer<typeof EventIdSchema>
+
+export const EventSchema = z.object({
+  id: EventIdSchema,
   name: z.string(),
   dates: z.object({
     start: z.object({
@@ -13,7 +18,7 @@ export const EventCardSchema = z.object({
   }).array(),
   info: z.string()
 })
-export type EventCardValues = z.infer<typeof EventCardSchema>
+export type EventValues = z.infer<typeof EventSchema>
 
 export const CardPositionSchema = z.object({
   top: z.number(), 

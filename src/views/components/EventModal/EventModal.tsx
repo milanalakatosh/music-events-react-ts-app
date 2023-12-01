@@ -1,35 +1,60 @@
 import * as React from 'react'
-import { CardPosition, EventCardValues } from '../types'
+import { CardPosition, EventId, EventValues } from '../types'
 import styles from './EventModal.module.scss'
 import { FlexContainer } from '../FlexContainer/FlexContainer'
+import { apiKey } from '../../../data/apiKeys'
 
 export type EventCardProps = Readonly<{
-  event: EventCardValues
+  eventId: EventId
 	onClose: () => void
 	position: Readonly<CardPosition>
 }>
 
-export const EventModal: React.FC<EventCardProps> = ({ event, onClose, position }) => {
-	console.log(222, position)
+export const EventModal: React.FC<EventCardProps> = ({ eventId, onClose, position }) => {
+	const [eventInfo, setEventInfo] = React.useState<EventValues | undefined>(undefined)
+
+	React.useEffect(() => {
+    const fetchEventInfo = async () => {
+      try {
+        const response =  await fetch(
+          `https://app.ticketmaster.com/discovery/v2/events/${eventId}?apikey=${apiKey}`
+        )
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok')
+        }
+
+        const data = await response.json()
+        setEventInfo(data)
+      } catch (error) {
+        console.error('Error fetching event info:', error)
+      }
+    }
+		fetchEventInfo();
+	}, [eventId])
 
 	return (
-		<div
-			style={{ top: position.top, right: 0 }}
-			className={styles.eventModalOverlay}
-			onClick={onClose}
-		>
-			<FlexContainer
-				justifyContentSpaceBetween
-				className={styles.eventModal}
-			>
-				<FlexContainer vertical>
-					<h3>{event.name}</h3>
-					<p>Date: {event.dates.start.localDate}</p>
-					<p>{event.info}</p>
-					<button onClick={onClose}>Close details</button>
-				</FlexContainer>
-				<img src={event.images[0].url} alt={event.name} />
-			</FlexContainer>
-		</div>
+		<>
+			{eventInfo && (
+				<div
+					style={{ top: position.top, right: 0 }}
+					className={styles.eventModalOverlay}
+					onClick={onClose}
+				>
+					<FlexContainer
+						justifyContentSpaceBetween
+						className={styles.eventModal}
+					>
+						<FlexContainer vertical>
+							<h3>{eventInfo.name}</h3>
+							<p>Date: {eventInfo.dates.start.localDate}</p>
+							<p>{eventInfo.info}</p>
+							<button onClick={onClose}>Close details</button>
+						</FlexContainer>
+						<img src={eventInfo.images[0].url} alt={eventInfo.name} />
+					</FlexContainer>
+				</div>
+			)}
+		</>
 	)
 }
