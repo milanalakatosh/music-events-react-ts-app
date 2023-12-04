@@ -10,13 +10,17 @@ export const EventSchema = z.object({
   name: z.string(),
   dates: z.object({
     start: z.object({
-      localDate: z.string()
+      localDate: z.string(),
+      localTime: z.string()
     })
   }),
   images: z.object({
     url: z.string()
   }).array(),
-  info: z.string()
+  info: z.string(),
+  promoter: z.object({
+    name: z.string()
+  })
 })
 export type EventValues = z.infer<typeof EventSchema>
 
