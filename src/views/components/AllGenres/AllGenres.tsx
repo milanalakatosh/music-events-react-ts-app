@@ -11,7 +11,7 @@ export const AllGenres: React.FC = () => {
   const [loading, setLoading] = React.useState(true)
   const [position, setPosition] = React.useState<Readonly<CardPosition>>({
 		top: 0,
-		right: 0,
+		left: 0,
 	})
   const [selectedEventId, setSelectedEventId] = React.useState<EventId | undefined>(undefined)
 
@@ -60,7 +60,13 @@ export const AllGenres: React.FC = () => {
 		<>
 			<FlexContainer wrap responsiveGap justifyContentSpaceAround>
 				{events &&
-					events.map((event) => <EventCard key={event.id} event={event} onClick={(e) => handleCardClick(e, event.id)}/>)}
+					events.map((event) => (
+						<EventCard
+							key={event.id}
+							event={event}
+							onClick={(e) => handleCardClick(e, event.id)}
+						/>
+					))}
 			</FlexContainer>
 			{selectedEventId && (
 				<EventModal
