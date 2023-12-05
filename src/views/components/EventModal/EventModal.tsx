@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { CardPosition, EventId, EventValues } from '../types'
 import styles from './EventModal.module.scss'
-import { FlexContainer } from '../FlexContainer/FlexContainer'
+import { FlexContainer } from '../FlexContainer'
 import { apiKey } from '../../../data/apiKeys'
 import { patternText } from '../../../data/stores/const'
 import calendarIcon from  './calendarIcon.svg'

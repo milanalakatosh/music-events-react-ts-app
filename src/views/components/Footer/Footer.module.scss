@@ -1,0 +1,13 @@
+@import '../../styles/const.scss';
+
+.footer {
+  &Container {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 53px;
+    width: 100vw;
+    background-color: $darkBlue;
+    color: $white;
+  }
+}
