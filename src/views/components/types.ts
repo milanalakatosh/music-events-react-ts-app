@@ -9,6 +9,7 @@ export const EventSchema = z.object({
   id: EventIdSchema,
   name: z.string(),
   dates: z.object({
+    timezone: z.string(),
     start: z.object({
       localDate: z.string(),
       localTime: z.string()

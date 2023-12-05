@@ -6,35 +6,45 @@ import { apiKey } from '../../../data/apiKeys'
 import { patternText } from '../../../data/stores/const'
 import calendarIcon from  './calendarIcon.svg'
 import placeIcon from  './placeIcon.svg'
+import {format, parseISO} from 'date-fns'
 
 export type EventCardProps = Readonly<{
-  eventId: EventId
+	eventId: EventId
 	onClose: () => void
 	position: Readonly<CardPosition>
 }>
 
-export const EventModal: React.FC<EventCardProps> = ({ eventId, onClose, position }) => {
-	const [eventInfo, setEventInfo] = React.useState<EventValues | undefined>(undefined)
+export const EventModal: React.FC<EventCardProps> = ({
+	eventId,
+	onClose,
+	position,
+}) => {
+	const [eventInfo, setEventInfo] = React.useState<EventValues | undefined>(
+		undefined
+	)
 
 	React.useEffect(() => {
-    const fetchEventInfo = async () => {
-      try {
-        const response =  await fetch(
-          `https://app.ticketmaster.com/discovery/v2/events/${eventId}?apikey=${apiKey}`
-        )
+		const fetchEventInfo = async () => {
+			try {
+				const response = await fetch(
+					`https://app.ticketmaster.com/discovery/v2/events/${eventId}?apikey=${apiKey}`
+				)
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok')
-        }
+				if (!response.ok) {
+					throw new Error('Network response was not ok')
+				}
 
-        const data = await response.json()
-        setEventInfo(data)
+				const data = await response.json()
+				setEventInfo(data)
 				console.log(123, eventInfo)
-      } catch (error) {
-        console.error('Error fetching event info:', error)
-      }
-    }
-		fetchEventInfo();
+				if (eventInfo) {
+					console.log(123432, eventInfo.dates.timezone)
+				}
+			} catch (error) {
+				console.error('Error fetching event info:', error)
+			}
+		}
+		fetchEventInfo()
 	}, [eventId])
 
 	return (
@@ -63,8 +73,16 @@ export const EventModal: React.FC<EventCardProps> = ({ eventId, onClose, positio
 									alt='calendar icon'
 								/>
 								<p>
-									{eventInfo.dates.start.localDate} @{' '}
-									{eventInfo.dates.start.localTime}{' '}
+									{format(
+										new Date(parseISO(eventInfo.dates.start.localDate)),
+										'iiii'
+									)}
+									,{' '}
+									{format(
+										new Date(parseISO(eventInfo.dates.start.localDate)),
+										'MM.dd.yyyy'
+									)}{' '}
+									@ {eventInfo.dates.start.localTime.slice(0, 5)}{' '}
 								</p>
 							</FlexContainer>
 
@@ -74,10 +92,17 @@ export const EventModal: React.FC<EventCardProps> = ({ eventId, onClose, positio
 									src={placeIcon}
 									alt='place icon'
 								/>
-								<p className={styles.eventLocation}>{eventInfo.promoter.name}</p>
+								<p>
+									{eventInfo.promoter.name.toUpperCase()},{' '}
+									{eventInfo.dates.timezone.substring(
+										eventInfo.dates.timezone.search(/\//) + 1
+									)}
+								</p>
 							</FlexContainer>
 
-							<p className={styles.eventTextInfo}>{eventInfo.info ?? patternText}</p>
+							<p className={styles.eventTextInfo}>
+								{eventInfo.info ?? patternText}
+							</p>
 							<button onClick={onClose}>Close details</button>
 						</FlexContainer>
 						<div className={styles.eventImgContainer}>
