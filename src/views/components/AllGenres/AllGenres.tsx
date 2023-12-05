@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { apiKey } from '../../../data/apiKeys'
-import { EventCard } from '../EventCard/EventCard'
+import { EventCard } from '../EventCard'
 import { CardPosition, EventValues, EventId } from '../types'
-import { FlexContainer } from '../FlexContainer/FlexContainer'
-import { EventModal } from '../EventModal/EventModal'
+import { FlexContainer } from '../FlexContainer'
+import { EventModal } from '../EventModal'
 
 export const AllGenres: React.FC = () => {
 
