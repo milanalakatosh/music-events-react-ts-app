@@ -1,4 +1,4 @@
-$darkBlue: #252B40;
+@import '../../styles/const.scss';
 
 .menu {
   background-color: $darkBlue;
@@ -10,13 +10,13 @@ $darkBlue: #252B40;
 
   &Header {
     font-size: 40px;
-    color: #FFF;
+    color: $white;
   }
 
   &Container {
     position: static;
-    max-width: 1440px;
-    padding: 2rem;
+    max-width: $containerMaxWidth;
+    padding: $containerInnerGap;
   }
 
 

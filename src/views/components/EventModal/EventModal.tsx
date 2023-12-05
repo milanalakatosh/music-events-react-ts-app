@@ -8,6 +8,19 @@ import calendarIcon from  './calendarIcon.svg'
 import placeIcon from  './placeIcon.svg'
 import {format, parseISO} from 'date-fns'
 
+export type IconWithTextProps = React.PropsWithChildren &
+	Readonly<{
+		text: string
+		className?: string
+	}>
+
+const IconWithText: React.FC<IconWithTextProps> = ({ children, text }) => (
+	<FlexContainer fixedDirection responsiveGap  className={styles.iconWithText}>
+		{children}
+		<p>{text}</p>
+	</FlexContainer>
+)
+
 export type EventCardProps = Readonly<{
 	eventId: EventId
 	onClose: () => void
@@ -36,10 +49,6 @@ export const EventModal: React.FC<EventCardProps> = ({
 
 				const data = await response.json()
 				setEventInfo(data)
-				console.log(123, eventInfo)
-				if (eventInfo) {
-					console.log(123432, eventInfo.dates.timezone)
-				}
 			} catch (error) {
 				console.error('Error fetching event info:', error)
 			}
@@ -66,44 +75,33 @@ export const EventModal: React.FC<EventCardProps> = ({
 					>
 						<FlexContainer vertical className={styles.eventInfo}>
 							<h3 className={styles.eventHeader}>{eventInfo.name}</h3>
-							<FlexContainer fixedDirection responsiveGap>
-								<img
-									className={styles.eventIcon}
-									src={calendarIcon}
-									alt='calendar icon'
-								/>
-								<p>
-									{format(
-										new Date(parseISO(eventInfo.dates.start.localDate)),
-										'iiii'
-									)}
-									,{' '}
-									{format(
-										new Date(parseISO(eventInfo.dates.start.localDate)),
-										'MM.dd.yyyy'
-									)}{' '}
-									@ {eventInfo.dates.start.localTime.slice(0, 5)}{' '}
-								</p>
-							</FlexContainer>
 
-							<FlexContainer fixedDirection responsiveGap>
-								<img
-									className={styles.eventIcon}
-									src={placeIcon}
-									alt='place icon'
-								/>
-								<p>
-									{eventInfo.promoter.name.toUpperCase()},{' '}
-									{eventInfo.dates.timezone.substring(
+							<IconWithText
+								text={`${format(
+									new Date(parseISO(eventInfo.dates.start.localDate)),
+									'iiii'
+								)}, ${format(
+									new Date(parseISO(eventInfo.dates.start.localDate)),
+									'MM.dd.yyyy'
+								)}
+									@ ${eventInfo.dates.start.localTime.slice(0, 5)}`}
+							>
+								<img src={calendarIcon} alt='calendar icon' />
+							</IconWithText>
+
+							<IconWithText
+								text={`${eventInfo.promoter.name.toUpperCase()}, 
+									${eventInfo.dates.timezone.substring(
 										eventInfo.dates.timezone.search(/\//) + 1
-									)}
-								</p>
-							</FlexContainer>
+									)}`}
+							>
+								<img src={placeIcon} alt='place icon' />
+							</IconWithText>
 
 							<p className={styles.eventTextInfo}>
 								{eventInfo.info ?? patternText}
 							</p>
-							<button onClick={onClose}>Close details</button>
+							<button className={styles.eventButton} onClick={onClose}>Close details</button>
 						</FlexContainer>
 						<div className={styles.eventImgContainer}>
 							<img src={eventInfo.images[0].url} alt={eventInfo.name} />
