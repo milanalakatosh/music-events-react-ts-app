@@ -4,11 +4,16 @@ import { EventCard } from '../EventCard'
 import { CardPosition, EventValues, EventId } from '../types'
 import { FlexContainer } from '../FlexContainer'
 import { EventModal } from '../EventModal'
+import { useDispatch, useSelector } from 'react-redux'
+import { setEvents } from '../../../data/stores/redux/reducers/actionTypes'
 
 export const AllGenres: React.FC = () => {
 
-	const [events, setEvents] = React.useState<Array<EventValues>>([])
-  const [loading, setLoading] = React.useState(true)
+	const events = useSelector((state: { events: ReadonlyArray<EventValues> }) => state.events)
+
+	const dispatch = useDispatch()
+
+	const [loading, setLoading] = React.useState(true)
   const [position, setPosition] = React.useState<Readonly<CardPosition>>({
 		top: 0,
 		left: 0,
@@ -41,7 +46,7 @@ export const AllGenres: React.FC = () => {
 
 				const data = await response.json()
 
-				setEvents(data._embedded.events)
+				dispatch(setEvents(data._embedded.events))
 				setLoading(false)
 			} catch (error) {
 				console.error('Error fetching events:', error)
