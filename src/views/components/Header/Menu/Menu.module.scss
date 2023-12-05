@@ -1,15 +1,18 @@
+@import '../../../styles/const.scss';
+$menuFontSize: 20px;
+
 .menu {
   &Mobile {
     position: relative;
     position: absolute;
     right: 2rem;
-    background-color: #fff;
+    background-color: $white;
     border-radius: 5px;
   }
 
   &MobileList {
     position: absolute;
-    background-color: white;
+    background-color: $white;
     top: 2.6rem;
     right: -2rem;
     border: 1px solid #252B40;
@@ -18,21 +21,21 @@
   }
   
   &Button {
-    background-color: white;
-    color: #252B40;
+    background-color: $white;
+    color: $darkBlue;
     padding: 10px 15px;
     border-radius: 5px;
     border: unset;
     cursor: pointer;
-    font-size: 20px;
+    font-size: $menuFontSize;
   }
 
   &Items {
-    font-size: 20px;
+    font-size: $menuFontSize;
     text-decoration: unset;
-    color: #FFF;
+    color: $white;
     @media screen and (max-width: 900px) {
-      color: #252B40;
+      color: $darkBlue;
     }
     &:first-child {
       color: #FEC017;

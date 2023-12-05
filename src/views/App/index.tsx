@@ -1,10 +1,11 @@
 import React from 'react'
-import { Page } from '../components/page/Page'
+import { Page } from '../components/Page/Page'
+import { AllGenres } from '../components/AllGenres/AllGenres'
 
 export const App: React.FC = () => {
   return (
     <Page>
-      <h1>hello</h1>
+      <AllGenres />
     </Page>
   )
 }

@@ -1,0 +1,8 @@
+# Node specific
+/node_modules
+
+# Environment local configurations
+.env
+
+# Log files
+*.log

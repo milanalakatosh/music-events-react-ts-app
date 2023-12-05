@@ -1,0 +1,11 @@
+.card {
+  cursor: pointer;
+  position: relative;
+
+  &Img {
+    width: 332px;
+    height: 221px;
+    object-fit: cover;
+  }
+}
+
