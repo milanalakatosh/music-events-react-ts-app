@@ -8,6 +8,7 @@ import calendarIcon from  './calendarIcon.svg'
 import placeIcon from  './placeIcon.svg'
 import {format, parseISO} from 'date-fns'
 import { useEventStore } from '../../../data/stores/useEventStore'
+import { useSelector } from 'react-redux'
 
 export type IconWithTextProps = React.PropsWithChildren &
 	Readonly<{
@@ -23,18 +24,20 @@ const IconWithText: React.FC<IconWithTextProps> = ({ children, text }) => (
 )
 
 export type EventCardProps = Readonly<{
-	eventId: EventId
 	onClose: () => void
-	position: Readonly<CardPosition>
 }>
 
-export const EventModal: React.FC<EventCardProps> = ({
-	eventId,
-	onClose,
-	position,
-}) => {
+export const EventModal: React.FC<EventCardProps> = ({ onClose }) => {
 	const event = useEventStore((store) => store.event)
 	const setEvent = useEventStore((store) => store.setEvent)
+
+	const position = useSelector(
+		(state: { position: Readonly<CardPosition> }) => state.position
+	)
+
+	const eventId = useSelector(
+		(state: { eventId: Readonly<EventId> }) => state.eventId
+	)
 
 	React.useEffect(() => {
 		const fetchEventInfo = async () => {
@@ -58,7 +61,7 @@ export const EventModal: React.FC<EventCardProps> = ({
 
 	return (
 		<>
-			{event && (
+			{event && position && (
 				<div
 					style={{ top: position.top + 16, right: 0 }}
 					className={styles.eventModalOverlay}

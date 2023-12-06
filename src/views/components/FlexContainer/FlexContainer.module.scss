@@ -51,4 +51,12 @@
   .flexContainer.fixedDirection, .flexContainer.wrap {
     flex-direction: unset;
   }
+
+  .responsiveGap {
+    gap: 0.75rem;
+  }
+
+  .responsiveGap {
+    gap: 0.5rem;
+  }
 }
