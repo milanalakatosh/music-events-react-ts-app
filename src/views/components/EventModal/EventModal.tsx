@@ -63,7 +63,7 @@ export const EventModal: React.FC<EventCardProps> = ({ onClose }) => {
 		<>
 			{event && position && (
 				<div
-					style={{ top: position.top + 16, right: 0 }}
+					style={{ top: position.top + 16, right: 0, left: 0 }}
 					className={styles.eventModalOverlay}
 					onClick={onClose}
 				>
@@ -72,11 +72,12 @@ export const EventModal: React.FC<EventCardProps> = ({ onClose }) => {
 						style={{ top: position.top - 20, left: position.left + 140 }}
 					></div>
 					<FlexContainer
+						fixedDirection
 						noGap
 						justifyContentSpaceBetween
 						className={styles.eventModal}
 					>
-						<FlexContainer vertical responsiveGap className={styles.eventInfo}>
+						<FlexContainer vertical justifyContentSpaceAround responsiveGap className={styles.eventInfo}>
 							<h3 className={styles.eventHeader}>{event.name}</h3>
 
 							<IconWithText

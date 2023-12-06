@@ -6,6 +6,10 @@ body {
     width: 100%;
     box-sizing: border-box;
 
+    @media screen and (max-width: 900px) {
+        font-size: 14px;
+    }
+
     #root {
         display: flex;
         flex-direction: column;

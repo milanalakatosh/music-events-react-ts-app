@@ -9,14 +9,13 @@ import { setEventId, setEvents, setPosition } from '../../../data/stores/redux/r
 
 export const AllGenres: React.FC = () => {
 	const events = useSelector((state: { events: ReadonlyArray<EventValues> }) => state.events)
+	const eventId = useSelector(
+		(state: { eventId: Readonly<EventId> }) => state.eventId
+	)
 
 	const dispatch = useDispatch()
 
-	const [loading, setLoading] = React.useState(true)
-
-  const eventId = useSelector(
-		(state: { eventId: Readonly<EventId> }) => state.eventId
-	)
+	const [loading, setLoading] = React.useState(true) // TODO: to implement the react-query for the api requests and use request.isFetching from there
 
 	const handleCardClick = (
 		event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -33,7 +32,12 @@ export const AllGenres: React.FC = () => {
 					top: window.scrollY + verticalScrollPoint,
 					behavior: 'smooth',
 				})
-				dispatch(setPosition({ top: rect.bottom - verticalScrollPoint, left: rect.left }))
+				dispatch(
+					setPosition({
+						top: rect.bottom - verticalScrollPoint,
+						left: rect.left,
+					})
+				)
 			}
 		}
 	}
@@ -42,12 +46,9 @@ export const AllGenres: React.FC = () => {
 		dispatch(setEventId(''))
 	}
 
-	React.useEffect(() => { 
-		console.log(111,eventId.length)}, [eventId])
-
 	React.useEffect(() => {
-    const fetchEvents = async () => {
-      try {
+		const fetchEvents = async () => {
+			try {
 				const response = await fetch(
 					`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=FI&classificationId=KZFzniwnSyZfZ7v7nJ&apikey=${apiKey}`
 				)
@@ -75,7 +76,7 @@ export const AllGenres: React.FC = () => {
 
 	return (
 		<>
-			<FlexContainer wrap responsiveGap justifyContentSpaceAround>
+			<FlexContainer wrap justifyContentSpaceAround>
 				{events &&
 					events.map((event) => (
 						<EventCard

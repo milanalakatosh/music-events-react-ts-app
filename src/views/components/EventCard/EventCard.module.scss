@@ -6,6 +6,10 @@
     width: 332px;
     height: 221px;
     object-fit: cover;
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      object-fit: fill;
+    }
   }
 }
 
