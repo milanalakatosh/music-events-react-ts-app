@@ -15,7 +15,7 @@ $menuFontSize: 20px;
     background-color: $white;
     top: 2.6rem;
     right: -2rem;
-    border: 1px solid #252B40;
+    border: 1px solid $darkBlue;
     padding: 1rem;
     border-radius: 5px;
   }
@@ -38,7 +38,10 @@ $menuFontSize: 20px;
       color: $darkBlue;
     }
     &:first-child {
-      color: #FEC017;
+      color: $yellow;
+    }
+    &:hover {
+      opacity: 0.8;
     }
   }
 

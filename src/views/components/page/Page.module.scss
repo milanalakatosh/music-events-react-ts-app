@@ -2,7 +2,7 @@
 
 .pageContent {
   max-width: $containerMaxWidth;
-  padding: $containerInnerGap;
+  padding: $containerInnerGap $containerInnerGap 5.5rem;
   display: flex;
   justify-content: center;
 }
