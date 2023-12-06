@@ -73,7 +73,7 @@ export const EventModal: React.FC<EventCardProps> = ({
 						justifyContentSpaceBetween
 						className={styles.eventModal}
 					>
-						<FlexContainer vertical className={styles.eventInfo}>
+						<FlexContainer vertical responsiveGap className={styles.eventInfo}>
 							<h3 className={styles.eventHeader}>{event.name}</h3>
 
 							<IconWithText
@@ -91,9 +91,7 @@ export const EventModal: React.FC<EventCardProps> = ({
 
 							<IconWithText
 								text={`${event.promoter.name.toUpperCase()}, 
-									${event.dates.timezone.substring(
-										event.dates.timezone.search(/\//) + 1
-									)}`}
+									${event.dates.timezone.substring(event.dates.timezone.search(/\//) + 1)}`}
 							>
 								<img src={placeIcon} alt='place icon' />
 							</IconWithText>
@@ -101,7 +99,9 @@ export const EventModal: React.FC<EventCardProps> = ({
 							<p className={styles.eventTextInfo}>
 								{event.info ?? patternText}
 							</p>
-							<button className={styles.eventButton} onClick={onClose}>Close details</button>
+							<button className={styles.eventButton} onClick={onClose}>
+								Close details
+							</button>
 						</FlexContainer>
 						<div className={styles.eventImgContainer}>
 							<img src={event.images[0].url} alt={event.name} />

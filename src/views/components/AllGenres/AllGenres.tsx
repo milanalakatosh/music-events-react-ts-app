@@ -27,6 +27,17 @@ export const AllGenres: React.FC = () => {
 		const rect = event.currentTarget.getBoundingClientRect()
 		setSelectedEventId(eventId)
 		setPosition({ top: rect.bottom, left: rect.left })
+
+		if (event && rect) {
+			if (rect.bottom + 400 > window.innerHeight) {
+				const verticalScrollPoint = 400 - (window.innerHeight - rect.bottom)
+				window.scrollTo({
+					top: window.scrollY + verticalScrollPoint,
+					behavior: 'smooth',
+				})
+				setPosition({ top: rect.bottom - verticalScrollPoint, left: rect.left })
+			}
+		}
 	}
 
 	const handleModalClose = () => {
