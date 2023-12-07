@@ -6,6 +6,6 @@ import { eventIdReducer } from './eventsIdReducer'
 export const rootReducer = combineReducers({
   events: eventsReducer,
   position: positionReducer,
-  eventId: eventIdReducer
+  eventId: eventIdReducer,
 }
 )

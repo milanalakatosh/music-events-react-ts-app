@@ -16,5 +16,4 @@ export const initState: EventsState = {
 		left: 0,
 	}, 
   eventId: ''
-
 }

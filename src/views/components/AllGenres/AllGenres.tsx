@@ -6,12 +6,17 @@ import { FlexContainer } from '../FlexContainer'
 import { EventModal } from '../EventModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { setEventId, setEvents, setPosition } from '../../../data/stores/redux/reducers/actionTypes'
+import { useSearchValueStore } from '../../../data/stores/useSearchValueStore'
 
 export const AllGenres: React.FC = () => {
-	const events = useSelector((state: { events: ReadonlyArray<EventValues> }) => state.events)
-	const eventId = useSelector(
-		(state: { eventId: Readonly<EventId> }) => state.eventId
+	const events = useSelector(
+		(state: { events: ReadonlyArray<EventValues> }) => state.events
 	)
+	const eventId = useSelector(
+		(state: { eventId: any }) => state.eventId
+	)
+
+	const searchValue = useSearchValueStore((store) => store.searchValue)
 
 	const dispatch = useDispatch()
 
@@ -49,8 +54,9 @@ export const AllGenres: React.FC = () => {
 	React.useEffect(() => {
 		const fetchEvents = async () => {
 			try {
+				console.log(1, searchValue)
 				const response = await fetch(
-					`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=FI&classificationId=KZFzniwnSyZfZ7v7nJ&apikey=${apiKey}`
+					`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=FI&classificationId=KZFzniwnSyZfZ7v7nJ&apikey=${apiKey}&keyword=${searchValue}`
 				)
 
 				if (!response.ok) {
@@ -58,7 +64,6 @@ export const AllGenres: React.FC = () => {
 				}
 
 				const data = await response.json()
-
 				dispatch(setEvents(data._embedded.events))
 				setLoading(false)
 			} catch (error) {
@@ -68,11 +73,12 @@ export const AllGenres: React.FC = () => {
 		}
 
 		fetchEvents()
-	}, [])
+	}, [searchValue])
 
-  if (loading) {
-    return <p>Loading...</p>
-  }
+
+	if (loading) {
+		return <p>Loading...</p>
+	}
 
 	return (
 		<>

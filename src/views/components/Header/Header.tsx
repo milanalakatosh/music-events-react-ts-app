@@ -9,10 +9,6 @@ import { MenuItemDefinition, menuItemsList } from './menuItems'
 export const Header: React.FC = () => {
 	const menuItems: ReadonlyArray<MenuItemDefinition> = menuItemsList
 
-	const [searchResults, setSearchResults] = React.useState<
-		ReadonlyArray<string>
-	>([])
-
 	const [isSmallScreen, setIsSmallScreen] = React.useState(
 		window.matchMedia('(max-width: 900px)').matches
 	)
@@ -33,15 +29,6 @@ export const Header: React.FC = () => {
 		}
 	}, [])
 
-	const handleSearch = (searchTerm: string): void => {
-		// For simplicity, just filter an array of example data
-		const exampleData = ['blues', 'rock', 'pop', 'jazz', 'func']
-		const filteredResults = exampleData.filter((item) =>
-			item.toLowerCase().includes(searchTerm.toLowerCase())
-		)
-		setSearchResults(filteredResults)
-	}
-
 	return (
 		<div className={styles.menu}>
 			<FlexContainer vertical className={styles.menuContainer}>
@@ -49,7 +36,7 @@ export const Header: React.FC = () => {
 					justifyContentSpaceBetween
 				>
 					<h1 className={styles.menuHeader}>Music Events</h1>
-					<SearchBar onSearch={handleSearch} />
+					<SearchBar />
 				</FlexContainer>
 				{isSmallScreen ? (
 					<MobileMenu menuItems={menuItems} />
