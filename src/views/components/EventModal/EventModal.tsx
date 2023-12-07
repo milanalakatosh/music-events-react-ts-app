@@ -8,6 +8,7 @@ import calendarIcon from  './calendarIcon.svg'
 import placeIcon from  './placeIcon.svg'
 import {format, parseISO} from 'date-fns'
 import { useEventStore } from '../../../data/stores/useEventStore'
+import { useSelector } from 'react-redux'
 
 export type IconWithTextProps = React.PropsWithChildren &
 	Readonly<{
@@ -23,18 +24,20 @@ const IconWithText: React.FC<IconWithTextProps> = ({ children, text }) => (
 )
 
 export type EventCardProps = Readonly<{
-	eventId: EventId
 	onClose: () => void
-	position: Readonly<CardPosition>
 }>
 
-export const EventModal: React.FC<EventCardProps> = ({
-	eventId,
-	onClose,
-	position,
-}) => {
+export const EventModal: React.FC<EventCardProps> = ({ onClose }) => {
 	const event = useEventStore((store) => store.event)
 	const setEvent = useEventStore((store) => store.setEvent)
+
+	const position = useSelector(
+		(state: { position: Readonly<CardPosition> }) => state.position
+	)
+
+	const eventId = useSelector(
+		(state: { eventId: Readonly<EventId> }) => state.eventId
+	)
 
 	React.useEffect(() => {
 		const fetchEventInfo = async () => {
@@ -58,9 +61,9 @@ export const EventModal: React.FC<EventCardProps> = ({
 
 	return (
 		<>
-			{event && (
+			{event && position && (
 				<div
-					style={{ top: position.top + 16, right: 0 }}
+					style={{ top: position.top + 16, right: 0, left: 0 }}
 					className={styles.eventModalOverlay}
 					onClick={onClose}
 				>
@@ -69,11 +72,12 @@ export const EventModal: React.FC<EventCardProps> = ({
 						style={{ top: position.top - 20, left: position.left + 140 }}
 					></div>
 					<FlexContainer
+						fixedDirection
 						noGap
 						justifyContentSpaceBetween
 						className={styles.eventModal}
 					>
-						<FlexContainer vertical className={styles.eventInfo}>
+						<FlexContainer vertical justifyContentSpaceAround responsiveGap className={styles.eventInfo}>
 							<h3 className={styles.eventHeader}>{event.name}</h3>
 
 							<IconWithText
@@ -91,9 +95,7 @@ export const EventModal: React.FC<EventCardProps> = ({
 
 							<IconWithText
 								text={`${event.promoter.name.toUpperCase()}, 
-									${event.dates.timezone.substring(
-										event.dates.timezone.search(/\//) + 1
-									)}`}
+									${event.dates.timezone.substring(event.dates.timezone.search(/\//) + 1)}`}
 							>
 								<img src={placeIcon} alt='place icon' />
 							</IconWithText>
@@ -101,7 +103,9 @@ export const EventModal: React.FC<EventCardProps> = ({
 							<p className={styles.eventTextInfo}>
 								{event.info ?? patternText}
 							</p>
-							<button className={styles.eventButton} onClick={onClose}>Close details</button>
+							<button className={styles.eventButton} onClick={onClose}>
+								Close details
+							</button>
 						</FlexContainer>
 						<div className={styles.eventImgContainer}>
 							<img src={event.images[0].url} alt={event.name} />

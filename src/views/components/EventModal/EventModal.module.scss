@@ -3,16 +3,17 @@
 .event {
   &ModalOverlay {
     position: fixed;
-    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
   
   &Modal {
-    width: 100vw;
+    max-width: $containerMaxWidth;
+    width: 100%;
     position: relative;
-    height: 400px;
+    height: $eventInfoModalHeight;
   }
   
   &Info {
@@ -48,7 +49,7 @@
   &ImgContainer img {
     width: 100%;
     object-fit: fill;
-    height: 400px;
+    height: $eventInfoModalHeight;
   }
 
   &Button {
@@ -61,13 +62,36 @@
     padding: 0.5rem 1rem;
   }
   
-  @media screen and (max-width: 901px) {
-    &ImgContainer, &Info {
+  @media screen and (max-width: 900px) {
+    &ImgContainer {
+      display: none;
+    }
+
+    &Info {
       width: 100%;
     }
-  
-    &ImgBlur{
-      box-shadow: unset;
+
+    &Header {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    &TextInfo {
+      line-height: 16px; 
+    }
+  }
+  @media screen and (max-width: 600px) {
+    &Header {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    &TextInfo {
+      line-height: 16px; 
+    }
+
+    &Info {
+      padding: 1rem;;
     }
   }
 }
@@ -81,5 +105,8 @@
   border: 22px solid transparent; 
   border-bottom: 20px solid $darkBlue;
   position: fixed;
+  @media screen and (max-width: 600px) {
+    left: unset !important;
+  }
 }
 

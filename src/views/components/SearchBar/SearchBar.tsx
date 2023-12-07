@@ -1,28 +1,20 @@
 import * as React from 'react'
 import styles from './SearchBar.module.scss'
+import { useSearchValueStore } from '../../../data/stores/useSearchValueStore'
 
-type Props = Readonly<{
-  onSearch: (value: string) => void
-}> 
+export const SearchBar: React.FC = () => {
+  const searchValue = useSearchValueStore((store) => store.searchValue)
+  const setSearchValue = useSearchValueStore((store) => store.setSearchValue)
 
-export const SearchBar: React.FC<Props> = ({ onSearch }) => {
-
-  const [searchTerm, setSearchTerm] = React.useState<string>('')
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value)
-    onSearch(e.target.value)
-  }
-
-  return (
+	return (
 		<div className={styles.searchBar}>
-     <input
-        className={styles.inputSearch}
-        type='text'
-        placeholder='🔍   Search for events'
-        value={searchTerm}
-        onChange={handleInputChange}
-      />
+			<input
+				className={styles.inputSearch}
+				type='text'
+				placeholder='🔍   Search for events'
+				value={searchValue}
+				onChange={(e) => setSearchValue(e.target.value)}
+			/>
 		</div>
 	)
 }

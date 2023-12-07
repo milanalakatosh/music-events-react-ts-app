@@ -1,8 +1,10 @@
 @import '../../styles/const.scss';
 
+$pageInnerBottomGap: $eventInfoModalHeight + $footerHeight;
+
 .pageContent {
   max-width: $containerMaxWidth;
-  padding: $containerInnerGap;
+  padding: $containerInnerGap $containerInnerGap $pageInnerBottomGap; //the bottom padding is made larger than in the figma, so that if EventModal is opened in the  last row, its contents can be seen
   display: flex;
   justify-content: center;
 }
