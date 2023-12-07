@@ -1,14 +1,13 @@
-@media screen and (min-width: 901px) {
-  .searchBar {
-    align-self: center;
-  }
-
-  .inputSearch {
-    min-width: 336px;
-  }
-}
-
 .inputSearch {
-  padding: 0.5rem;
-  min-width: 230px;
+  width: 336px;
+  height: 36px;
+  padding: 0 0.5rem;
 }
+
+@media screen and (max-width: 600px) {
+  .inputSearch {
+    width: 230px;
+  }
+}
+
+

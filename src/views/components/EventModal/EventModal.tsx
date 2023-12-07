@@ -1,11 +1,12 @@
+/// <reference types="vite-plugin-svgr/client" />
 import * as React from 'react'
 import { CardPosition, EventId } from '../types'
 import styles from './EventModal.module.scss'
 import { FlexContainer } from '../FlexContainer'
 import { apiKey } from '../../../data/apiKeys'
 import { patternText } from '../../../data/stores/const'
-import calendarIcon from  './calendarIcon.svg'
-import placeIcon from  './placeIcon.svg'
+import CalendarIcon from  '../../../assets/icons/calendarIcon.svg?react'
+import PlaceIcon from  '../../../assets/icons/placeIcon.svg?react'
 import {format, parseISO} from 'date-fns'
 import { useEventStore } from '../../../data/stores/useEventStore'
 import { useSelector } from 'react-redux'
@@ -90,14 +91,15 @@ export const EventModal: React.FC<EventCardProps> = ({ onClose }) => {
 								)}
 									@ ${event.dates.start.localTime.slice(0, 5)}`}
 							>
-								<img src={calendarIcon} alt='calendar icon' />
+								{/* <img src={calendarIcon} alt='calendar icon' /> */}
+								<CalendarIcon />
 							</IconWithText>
 
 							<IconWithText
 								text={`${event.promoter.name.toUpperCase()}, 
 									${event.dates.timezone.substring(event.dates.timezone.search(/\//) + 1)}`}
 							>
-								<img src={placeIcon} alt='place icon' />
+								<PlaceIcon />
 							</IconWithText>
 
 							<p className={styles.eventTextInfo}>

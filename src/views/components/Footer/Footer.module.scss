@@ -1,13 +1,13 @@
-@import '../../styles/const.scss';
+@import '../../../assets/styles/const.scss';
 
 .footer {
-  &Container {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: $footerHeight;
-    width: 100vw;
-    background-color: $darkBlue;
-    color: $white;
-  }
+	&Container {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		height: $footerHeight;
+		width: 100vw;
+		background-color: $darkBlue;
+		color: $white;
+	}
 }

@@ -1,26 +1,25 @@
-@import '../../styles/const.scss';
+@import '../../../assets/styles/const.scss';
 
 .menu {
-  background-color: $darkBlue;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  min-height: 9rem;
+	background-color: $darkBlue;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	position: relative;
+	min-height: 9rem;
 
-  &Header {
-    font-size: 40px;
-    color: $white;
-  }
+	&Header {
+		font-size: 40px;
+		color: $white;
+	}
 
-  &Container {
-    position: static;
-    max-width: $containerMaxWidth;
-    padding: $containerInnerGap;
-  }
+	&Container {
+		position: static;
+		max-width: $containerMaxWidth;
+		padding: $containerInnerGap;
+	}
 
-
-  @media screen and (max-width: 600px) {
-    min-height: 9rem;
-  }
+	@media screen and (max-width: 600px) {
+		min-height: 9rem;
+	}
 }

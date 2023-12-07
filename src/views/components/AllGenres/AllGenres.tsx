@@ -13,7 +13,7 @@ export const AllGenres: React.FC = () => {
 		(state: { events: ReadonlyArray<EventValues> }) => state.events
 	)
 	const eventId = useSelector(
-		(state: { eventId: any }) => state.eventId
+		(state: { eventId: Readonly<EventId> }) => state.eventId
 	)
 
 	const searchValue = useSearchValueStore((store) => store.searchValue)
@@ -54,7 +54,6 @@ export const AllGenres: React.FC = () => {
 	React.useEffect(() => {
 		const fetchEvents = async () => {
 			try {
-				console.log(1, searchValue)
 				const response = await fetch(
 					`https://app.ticketmaster.com/discovery/v2/events.json?countryCode=FI&classificationId=KZFzniwnSyZfZ7v7nJ&apikey=${apiKey}&keyword=${searchValue}`
 				)
